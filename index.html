@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy (Belated) Birthday Tiger! 🐯</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #08080f;
+            color: white;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* ===== SPLASH ===== */
+        .header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, #1a0a2e 0%, #08080f 80%);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(180,0,255,0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        .birthday-title {
+            font-size: clamp(2.2rem, 7vw, 4.5rem);
+            color: #c77dff;
+            text-shadow: 0 0 30px #c77dff, 0 0 60px rgba(199,125,255,0.4);
+            margin-bottom: 14px;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #c77dff; }
+            to   { text-shadow: 0 0 45px #c77dff, 0 0 90px rgba(199,125,255,0.6); }
+        }
+        .name-label {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: #ffd700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .subtitle {
+            font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+            color: #aaa;
+            margin-bottom: 6px;
+            position: relative;
+        }
+        .enter-btn {
+            margin-top: 30px;
+            padding: 16px 48px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #7b2ff7, #b44dff);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 30px rgba(123,47,247,0.55);
+            letter-spacing: 1px;
+        }
+        .enter-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 14px 40px rgba(123,47,247,0.8);
+        }
+        .enter-btn:active { transform: scale(0.97); }
+
+        /* Stars */
+        .stars { position: absolute; width: 100%; height: 100%; overflow: hidden; }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--dur) ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 1; }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        /* ===== SORRY SECTION ===== */
+        .sorry-section {
+            background: linear-gradient(180deg, #0f0a1a 0%, #1a0d2e 100%);
+        }
+        .sorry-card {
+            max-width: 560px;
+            width: 100%;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #1c0a2e, #2e1058);
+            border: 2px solid rgba(199,125,255,0.4);
+            border-radius: 28px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(123,47,247,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .sorry-card::before {
+            content: '🙏';
+            position: absolute;
+            font-size: 9rem;
+            opacity: 0.05;
+            top: -20px; right: -20px;
+        }
+        .sorry-emoji { font-size: 3.5rem; margin-bottom: 18px; }
+        .sorry-heading {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #c77dff;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .sorry-body {
+            font-size: 1.05rem;
+            line-height: 2.1;
+            color: rgba(255,255,255,0.88);
+        }
+        .sorry-body strong { color: #ffd700; }
+        .sorry-body em { color: #c77dff; }
+        .excuse-tag {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 8px 22px;
+            background: rgba(199,125,255,0.15);
+            border: 1px solid rgba(199,125,255,0.4);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #c77dff;
+            letter-spacing: 1px;
+        }
+
+        /* ===== VOLLEYBALL CARDS ===== */
+        .volleyball-section {
+            background: linear-gradient(180deg, #08080f 0%, #0d1a30 100%);
+        }
+        .card-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        .card-wrapper {
+            width: 260px;
+            height: 380px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+        }
+        .card-wrapper:hover .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .card-front {
+            background: linear-gradient(135deg, #00538a, #003d6b);
+            box-shadow: 0 0 40px rgba(0,83,138,0.5);
+        }
+        .card-back {
+            background: linear-gradient(135deg, #2c1654, #4a2580);
+            transform: rotateY(180deg);
+            box-shadow: 0 0 40px rgba(74,37,128,0.4);
+        }
+        .card-emoji { font-size: 4rem; margin-bottom: 16px; }
+        .card-player-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .card-stat {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+            margin-top: 10px;
+            text-align: center;
+            line-height: 1.7;
+        }
+        .card-badge {
+            margin-top: 14px;
+            padding: 6px 18px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 20px;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .card-flip-hint {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.55);
+            margin-top: 18px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== HONOR OF KINGS ===== */
+        .hok-section {
+            background: linear-gradient(180deg, #0d0020 0%, #150030 50%, #0d0020 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hok-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(138,0,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255,215,0,0.06) 0%, transparent 50%);
+        }
+        .hok-arena {
+            max-width: 600px;
+            width: 100%;
+            background: linear-gradient(135deg, #12002a, #1f0050, #2a0060);
+            border: 2px solid rgba(199,125,255,0.35);
+            border-radius: 24px;
+            padding: 50px 36px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(138,0,255,0.35), inset 0 0 40px rgba(138,0,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .hok-arena::before {
+            content: '⚔️';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.04;
+            top: -10px; left: -20px;
+        }
+        .hok-title-cn {
+            font-size: 1.3rem;
+            color: #c77dff;
+            letter-spacing: 4px;
+            margin-bottom: 6px;
+        }
+        .hok-title-en {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        .hero-slot {
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+        .hero-card-result {
+            display: none;
+            padding: 20px 28px;
+            background: rgba(199,125,255,0.12);
+            border: 1px solid rgba(199,125,255,0.4);
+            border-radius: 18px;
+            animation: heroReveal 0.6s ease;
+        }
+        @keyframes heroReveal {
+            from { transform: scale(0.7) rotateX(20deg); opacity: 0; }
+            to   { transform: scale(1) rotateX(0deg); opacity: 1; }
+        }
+        .hero-name { font-size: 1.8rem; font-weight: 900; color: #ffd700; margin-bottom: 6px; }
+        .hero-title { font-size: 1rem; color: #c77dff; margin-bottom: 8px; }
+        .hero-desc { font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.7; }
+        .draw-btn {
+            padding: 14px 40px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #5500aa, #8800ff);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 6px 25px rgba(136,0,255,0.5);
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .draw-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 35px rgba(136,0,255,0.75);
+        }
+        .draw-btn:disabled {
+            background: linear-gradient(135deg, #333,#555);
+            box-shadow: none;
+            cursor: default;
+            transform: none;
+        }
+        .hok-note {
+            margin-top: 22px;
+            font-size: 0.85rem;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        /* ===== GYM / WORKOUT ===== */
+        .gym-section {
+            background: linear-gradient(180deg, #0a0a0a 0%, #141414 100%);
+        }
+        .gym-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 860px;
+        }
+        .gym-tile {
+            width: 220px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #1a1a1a, #252525);
+            border: 1px solid #333;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.35s;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+        .gym-tile::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(199,125,255,0.08), transparent);
+            opacity: 0;
+            transition: 0.35s;
+        }
+        .gym-tile:hover { transform: translateY(-6px); border-color: rgba(199,125,255,0.5); }
+        .gym-tile:hover::before { opacity: 1; }
+        .gym-tile-icon { font-size: 2.8rem; margin-bottom: 12px; }
+        .gym-tile-label { font-size: 1rem; font-weight: 700; color: #c77dff; margin-bottom: 6px; letter-spacing: 1px; }
+        .gym-tile-desc { font-size: 0.85rem; color: #888; line-height: 1.6; }
+
+        /* ===== BASKETBALL (secondary) ===== */
+        .bball-section {
+            background: linear-gradient(180deg, #0f0a00 0%, #1a1200 100%);
+        }
+        .bball-card {
+            max-width: 500px;
+            width: 100%;
+            padding: 48px 38px;
+            background: linear-gradient(135deg, #201200, #3d2200);
+            border: 2px solid rgba(255,145,0,0.35);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255,120,0,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .bball-card::before {
+            content: '🏀';
+            position: absolute;
+            font-size: 9rem;
+            opacity: 0.07;
+            top: -10px; right: -20px;
+        }
+        .bball-card h3 { font-size: 1.7rem; color: #ffa500; margin-bottom: 20px; }
+        .bball-card p { font-size: 1.05rem; line-height: 2; color: rgba(255,255,255,0.88); }
+        .bball-card strong { color: #ffd700; }
+        .bball-btn {
+            margin-top: 28px;
+            padding: 12px 34px;
+            background: rgba(255,145,0,0.2);
+            border: 2px solid rgba(255,145,0,0.5);
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 700;
+        }
+        .bball-btn:hover { background: rgba(255,145,0,0.35); transform: scale(1.05); }
+        #bballResult { margin-top: 20px; font-size: 1.6rem; min-height: 50px; transition: 0.3s; }
+
+        /* ===== FINAL ===== */
+        .final-section {
+            background: radial-gradient(ellipse at center, #110022 0%, #08080f 100%);
+            text-align: center;
+        }
+        .final-msg {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            line-height: 2.3;
+            max-width: 620px;
+            color: #ddd;
+        }
+        .final-msg strong { color: #ffd700; }
+        .final-msg em { color: #c77dff; }
+        .signature {
+            margin-top: 40px;
+            font-size: 1.1rem;
+            color: #c77dff;
+            font-style: italic;
+        }
+
+        /* ===== FIREWORKS ===== */
+        .firework-particle {
+            position: fixed;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fwParticle var(--dur, 1.2s) ease-out forwards;
+        }
+        @keyframes fwParticle {
+            0%   { transform: translate(0,0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* ===== HIDDEN / TRANSITIONS ===== */
+        .content { display: none; }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Divider */
+        .divider {
+            width: 80px;
+            height: 3px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #7b2ff7, #c77dff);
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SPLASH PAGE -->
+    <div class="header" id="header">
+        <div class="stars" id="stars"></div>
+        <h1 class="birthday-title">🐯 Belated Birthday 🐯</h1>
+        <div class="name-label">Tiger</div>
+        <p class="subtitle">Turned 16 · April 16, 2010</p>
+        <p style="color:#777; font-size:0.92rem; margin-top:6px; letter-spacing:1px;">From your Harrow Shenzhen Year 7 mate 🏫</p>
+        <p style="color:#555; font-size:0.83rem; margin: 10px 0 28px; max-width:360px; text-align:center; line-height:1.7;">
+            (Late, but made with love — keep reading to find out why 😅)
+        </p>
+        <button class="enter-btn" onclick="showContent()">🎁 Open Your Gift</button>
+    </div>
+
+    <!-- GIFT CONTENT -->
+    <div class="content" id="giftContent">
+
+        <!-- 🙏 APOLOGY SECTION -->
+        <div class="section sorry-section">
+            <h2 class="section-title fade-in" style="color:#c77dff;">🙏 First Things First...</h2>
+            <div class="sorry-card fade-in">
+                <div class="sorry-emoji">😔</div>
+                <div class="sorry-heading">I'M SORRY, TIGER.</div>
+                <p class="sorry-body">
+                    Your birthday was <strong>April 16th</strong> — and I missed it.<br>
+                    I know. That's bad. Like, genuinely bad.<br><br>
+                    But here's the thing —<br>
+                    I was buried deep in <em>IGCSE revision mode</em>,<br>
+                    textbooks everywhere, brain fully offline,<br>
+                    barely knowing what day it <em>was</em>.<br><br>
+                    That's not an excuse. That's a confession.<br>
+                    <strong>You deserved a message on the day.</strong><br><br>
+                    So instead, I built you this.<br>
+                    A whole website. Because words alone aren't enough. 🙏
+                </p>
+                <span class="excuse-tag">⚠ IGCSE EXAM SURVIVOR — PLEASE FORGIVE</span>
+            </div>
+        </div>
+
+        <!-- 🏐 VOLLEYBALL STAR CARDS -->
+        <div class="section volleyball-section" style="background: linear-gradient(180deg, #0a1520 0%, #0d1e35 100%);">
+            <h2 class="section-title fade-in" style="color:#72c6ff;">🏐 Tiger's Star Cards</h2>
+            <p style="color:#aaa; margin-bottom:40px; font-size:0.95rem;" class="fade-in">Hover to flip ✨</p>
+            <div class="card-container fade-in">
+
+                <!-- Card 1: Wilfredo León -->
+                <div class="card-wrapper">
+                    <div class="card-inner">
+                        <div class="card-front" style="background: linear-gradient(135deg,#00538a,#003a6b);">
+                            <div class="card-emoji">🏐</div>
+                            <div class="card-player-name">Wilfredo León</div>
+                            <div class="card-stat">Cuban-Polish Ace<br>World's #1 Opposite Spiker</div>
+                            <div class="card-badge">GOAT TIER: S+</div>
+                            <div class="card-flip-hint">HOVER TO FLIP</div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-emoji">⚡</div>
+                            <div class="card-player-name">Why León?</div>
+                            <div class="card-stat">
+                                "One of the hardest<br>spikers on the planet.<br>Tiger energy: explosive,<br>unstoppable, elite."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Earvin N'Gapeth -->
+                <div class="card-wrapper">
+                    <div class="card-inner">
+                        <div class="card-front" style="background: linear-gradient(135deg,#006633,#004d26);">
+                            <div class="card-emoji">🌟</div>
+                            <div class="card-player-name">Earvin N'Gapeth</div>
+                            <div class="card-stat">French Golden Boy<br>Most Creative Player Alive</div>
+                            <div class="card-badge">LEGENDARY</div>
+                            <div class="card-flip-hint">HOVER TO FLIP</div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-emoji">🎩</div>
+                            <div class="card-player-name">Magic Hands</div>
+                            <div class="card-stat">
+                                "Plays like he's freestyling<br>every single point.<br>Unpredictable. Brilliant.<br>Just like Tiger."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Tiger -->
+                <div class="card-wrapper">
+                    <div class="card-inner">
+                        <div class="card-front" style="background: linear-gradient(135deg,#5a0d8a,#3b0060);">
+                            <div class="card-emoji">🐯</div>
+                            <div class="card-player-name">Tiger</div>
+                            <div class="card-stat">The Real MVP<br>Year 7 Legend Edition</div>
+                            <div class="card-badge">ULTRA RARE</div>
+                            <div class="card-flip-hint">HOVER TO FLIP</div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-emoji">💎</div>
+                            <div class="card-player-name">Card Stats</div>
+                            <div class="card-stat">
+                                Born: 16 Apr 2010<br>
+                                School: Harrow Shenzhen<br>
+                                First Met: Year 7<br>
+                                Friendship: ∞
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ⚔️ HONOR OF KINGS -->
+        <div class="section hok-section">
+            <h2 class="section-title fade-in" style="color:#c77dff;">⚔️ Honor of Kings</h2>
+            <div class="hok-arena fade-in">
+                <div class="hok-title-cn">王者荣耀</div>
+                <div class="hok-title-en">BIRTHDAY HERO DRAW</div>
+                <div class="divider"></div>
+                <p style="color:#888; font-size:0.9rem; margin-bottom:28px; line-height:1.8;">
+                    You've been loyal to the Rift since Year 7.<br>
+                    Here's a special draw — just for Tiger.
+                </p>
+                <div class="hero-slot">
+                    <div class="hero-card-result" id="heroResult">
+                        <div class="hero-name" id="heroName"></div>
+                        <div class="hero-title" id="heroTitle"></div>
+                        <div class="hero-desc" id="heroDesc"></div>
+                    </div>
+                </div>
+                <button class="draw-btn" id="drawBtn" onclick="drawHero()">✨ Draw Hero ✨</button>
+                <p class="hok-note" id="hokNote">[ TAP TO REVEAL YOUR BIRTHDAY HERO ]</p>
+            </div>
+        </div>
+
+        <!-- 💪 GYM & WORKOUT -->
+        <div class="section gym-section">
+            <h2 class="section-title fade-in" style="color:#c77dff;">💪 The Tiger Grind</h2>
+            <p style="color:#888; margin-bottom:40px; font-size:0.95rem; text-align:center;" class="fade-in">
+                Never skips a workout. Never skips leg day. Respect. 🙌
+            </p>
+            <div class="gym-grid fade-in">
+                <div class="gym-tile">
+                    <div class="gym-tile-icon">🏋️</div>
+                    <div class="gym-tile-label">LIFTS HEAVY</div>
+                    <div class="gym-tile-desc">Consistent in the gym. The dedication shows.</div>
+                </div>
+                <div class="gym-tile">
+                    <div class="gym-tile-icon">📐</div>
+                    <div class="gym-tile-label">FORM CHECK</div>
+                    <div class="gym-tile-desc">Cares about the details — form, posture, gains.</div>
+                </div>
+                <div class="gym-tile">
+                    <div class="gym-tile-icon">🧬</div>
+                    <div class="gym-tile-label">BUILT DIFFERENT</div>
+                    <div class="gym-tile-desc">Gym bro at 16. Some people just start early.</div>
+                </div>
+                <div class="gym-tile">
+                    <div class="gym-tile-icon">🔥</div>
+                    <div class="gym-tile-label">NO DAYS OFF</div>
+                    <div class="gym-tile-desc">The grind is real. The mindset is elite.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🏀 BASKETBALL BONUS -->
+        <div class="section bball-section">
+            <h2 class="section-title fade-in" style="color:#ffa500;">🏀 Court Blessing</h2>
+            <div class="bball-card fade-in">
+                <h3>🔥 For Every Pickup Game</h3>
+                <p>
+                    Whether it's volleyball, basketball, or just messing around on the court —<br>
+                    <strong>Tiger shows up for real every single time.</strong><br><br>
+                    The kind of player who goes full intensity<br>
+                    even in a casual 3v3.<br>
+                    That's not common. That's a W trait.
+                </p>
+                <button class="bball-btn" onclick="courtBlessing()">🏀 Get Your Court Blessing</button>
+                <div id="bballResult"></div>
+            </div>
+        </div>
+
+        <!-- 🎂 FINAL MESSAGE -->
+        <div class="section final-section">
+            <h2 class="section-title fade-in" style="color:#c77dff;">🎂 Happy (Belated) Birthday, Tiger!</h2>
+            <p class="final-msg fade-in">
+                We both started at <strong>Harrow Shenzhen</strong> in Year 7 —<br>
+                two kids who had no idea how things would turn out.<br><br>
+                You're now 16, into <em>volleyball</em>, <em>basketball</em>,<br>
+                grinding in the gym, climbing ranked on <strong>王者荣耀</strong>,<br>
+                and genuinely built different.<br><br>
+                Sorry this gift came a week late.<br>
+                <strong>The IGCSE exams broke my brain for a bit.</strong><br>
+                But I remembered. And I made something real.<br><br>
+                <em>Happy 16th, Tiger. This one's for you.</em> 🐯🎂
+            </p>
+            <p class="signature fade-in">— Your Harrow mate, always 🏫❤️</p>
+        </div>
+
+    </div>
+
+    <script>
+        // ── Stars ─────────────────────────────────────────────────
+        (function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 130; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                const size = Math.random() * 2.5 + 0.5;
+                s.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    top:${Math.random()*100}%; left:${Math.random()*100}%;
+                    --dur:${Math.random()*3+2}s;
+                    animation-delay:${Math.random()*4}s;
+                `;
+                container.appendChild(s);
+            }
+        })();
+
+        // ── Fireworks ─────────────────────────────────────────────
+        const COLORS = ['#c77dff','#ffd700','#ff4757','#72c6ff','#4dffb4','#ff9f43','#54a0ff','#fff'];
+
+        function launchFireworks(count = 30) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight * 0.7;
+                    burst(x, y);
+                }, i * 60);
+            }
+        }
+
+        function burst(x, y) {
+            const num = 12 + Math.floor(Math.random() * 10);
+            for (let i = 0; i < num; i++) {
+                const p = document.createElement('div');
+                p.className = 'firework-particle';
+                const angle = (i / num) * 2 * Math.PI;
+                const dist = 60 + Math.random() * 90;
+                p.style.cssText = `
+                    left:${x}px; top:${y}px;
+                    background:${COLORS[Math.floor(Math.random()*COLORS.length)]};
+                    --tx:${Math.cos(angle)*dist}px;
+                    --ty:${Math.sin(angle)*dist}px;
+                    --dur:${0.8 + Math.random()*0.6}s;
+                `;
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1500);
+            }
+        }
+
+        // ── Show content ──────────────────────────────────────────
+        function showContent() {
+            document.getElementById('header').style.display = 'none';
+            document.getElementById('giftContent').style.display = 'block';
+            launchFireworks(40);
+            setTimeout(() => observeFadeIns(), 100);
+        }
+
+        // ── Scroll fade-in ────────────────────────────────────────
+        function observeFadeIns() {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+        }
+
+        // ── Honor of Kings hero draw ──────────────────────────────
+        const HEROES = [
+            {
+                name: '李白 / Li Bai',
+                title: '诗仙剑客 · The Poet Swordsman',
+                desc: '"Swift as a tiger, sharp as a blade.\nFew can keep up with his pace."'
+            },
+            {
+                name: '后羿 / Hou Yi',
+                title: '弦月射手 · The Archer of the Moon',
+                desc: '"Every shot precise. Every aim clean.\nThat\'s pure Tiger energy."'
+            },
+            {
+                name: '亚瑟 / Arthur',
+                title: '亚特兰提斯之王 · King Tank',
+                desc: '"Unstoppable in a fight.\nTakes every hit and keeps going."'
+            },
+            {
+                name: '韩信 / Han Xin',
+                title: '国士无双 · The Unmatched Strategist',
+                desc: '"IQ plays. Outfarms everyone.\nThe smartest carry in the rift."'
+            },
+            {
+                name: '孙悟空 / Sun Wukong',
+                title: '齐天大圣 · The Monkey King',
+                desc: '"Three clones. Pure chaos.\nNo one\'s stopping him — including you."'
+            },
+            {
+                name: '嫦娥 / Chang\'e',
+                title: '月宫仙子 · Tiger\'s Lucky Card ★',
+                desc: '"Ultra rare pull — 0.07%.\nBirthday luck is real. Happy 16th, Tiger! 🎂"'
+            }
+        ];
+
+        let heroDrawn = false;
+        function drawHero() {
+            if (heroDrawn) return;
+            heroDrawn = true;
+
+            const btn = document.getElementById('drawBtn');
+            const note = document.getElementById('hokNote');
+            btn.disabled = true;
+            btn.textContent = '✨ Rolling...';
+
+            setTimeout(() => {
+                const hero = HEROES[Math.floor(Math.random() * HEROES.length)];
+                const resultEl = document.getElementById('heroResult');
+                document.getElementById('heroName').textContent = hero.name;
+                document.getElementById('heroTitle').textContent = hero.title;
+                document.getElementById('heroDesc').innerHTML = hero.desc.replace('\n','<br>');
+                resultEl.style.display = 'flex';
+                resultEl.style.flexDirection = 'column';
+                resultEl.style.alignItems = 'center';
+                btn.textContent = '🎉 Hero Drawn!';
+                note.textContent = '[ HAPPY BIRTHDAY TIGER — MAY YOU ALWAYS WIN RANKED ]';
+                note.style.color = '#c77dff';
+                launchFireworks(25);
+            }, 1500);
+        }
+
+        // ── Basketball court blessing ─────────────────────────────
+        const BLESSINGS = [
+            '🏀 CLUTCH GENE ACTIVATED — game winner incoming!',
+            '🔥 DOUBLE-DOUBLE ENERGY — boards AND buckets!',
+            '💥 POSTERIZED — sorry, defender. Tiger coming through.',
+            '⛹️ FULL COURT VISION — you see the play before it happens.',
+            '👑 BALLER CERTIFIED — court is yours today.',
+        ];
+        let blessingUsed = false;
+
+        function courtBlessing() {
+            const el = document.getElementById('bballResult');
+            const b = BLESSINGS[Math.floor(Math.random() * BLESSINGS.length)];
+            el.textContent = b;
+            el.style.color = '#ffd700';
+            el.style.textShadow = '0 0 12px rgba(255,215,0,0.5)';
+            launchFireworks(12);
+        }
+    </script>
+</body>
+</html>
